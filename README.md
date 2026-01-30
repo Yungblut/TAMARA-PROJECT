@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Version](https://img.shields.io/badge/version-2.1.0-blue)
+![Version](https://img.shields.io/badge/version-1.0.0-blue)
 ![Python](https://img.shields.io/badge/Python-3.10+-green)
 ![License](https://img.shields.io/badge/license-MIT-orange)
 
@@ -73,7 +73,6 @@ With MariaDB integration enabled, you can ask TAMARA:
 
 - Python 3.10+
 - [Ollama](https://ollama.ai/) installed and running
-- [eSpeak-NG](https://github.com/espeak-ng/espeak-ng) (for phonemization)
 - MariaDB (optional, for database tools)
 
 ### Installation
