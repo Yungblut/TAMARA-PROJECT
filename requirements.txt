@@ -1,0 +1,32 @@
+# 1. PyTorch con aceleración GPU (CRÍTICO para Whisper rápido)
+--extra-index-url https://download.pytorch.org/whl/cu121
+torch
+torchvision
+torchaudio
+
+
+# 2. Librerías del sistema
+pyttsx3
+RealtimeSTT
+ollama
+pywin32
+
+# 3. Mejorar el audio TTS
+kokoro-onnx
+sounddevice
+numpy
+colorama
+misaki
+soundfile
+
+# 4. Servidor Web
+fastapi
+uvicorn[standard]
+python-multipart
+pyyaml
+
+# 5. Base de datos MariaDB (para Tool Calling)
+mariadb>=1.1.0
+
+# 6. Variables de entorno desde archivo .env
+python-dotenv>=1.0.0

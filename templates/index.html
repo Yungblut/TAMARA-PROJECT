@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TAMARA - Asistente Inteligente Futurista con interfaz estilo Iron Man">
+    <title>TAMARA - Asistente Inteligente</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/static/css/styles.css?v=2">
+</head>
+
+<body>
+    <!-- Background Effects -->
+    <div class="hologram hologram-1"></div>
+    <div class="hologram hologram-2"></div>
+    <div class="hologram hologram-3"></div>
+    <div class="scan-line"></div>
+
+    <!-- Audio Indicator -->
+    <div class="audio-indicator" id="audioIndicator">
+        <div class="audio-bars">
+            <div class="audio-bar"></div>
+            <div class="audio-bar"></div>
+            <div class="audio-bar"></div>
+            <div class="audio-bar"></div>
+            <div class="audio-bar"></div>
+        </div>
+        <span>Reproduciendo...</span>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1 class="logo">TAMARA</h1>
+            <p class="subtitle">Asistente Inteligente Futurista</p>
+            <div class="status-container">
+                <div class="status disconnected" id="connectionStatus">
+                    <div class="status-dot"></div>
+                    <span id="statusText">DESCONECTADO</span>
+                </div>
+                <div class="status" id="aiStatus" style="display: none;">
+                    <div class="status-dot"></div>
+                    <span id="aiStatusText">PENSANDO</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Chat Panel -->
+            <div class="panel">
+                <h2 class="panel-title">💬 Conversación</h2>
+                <div class="chat-container">
+                    <div class="chat-history" id="chatHistory">
+                        <div class="message ai-message">
+                            <div class="message-label">TAMARA</div>
+                            ¡Hola! Soy TAMARA, tu asistente inteligente. ¿En qué puedo ayudarte hoy?
+                        </div>
+                    </div>
+                    <div class="input-area">
+                        <input type="text" id="userInput" placeholder="Escribe tu mensaje aquí..." autocomplete="off">
+                        <button class="btn btn-primary" id="sendButton" disabled>
+                            <span>⚡</span> Enviar
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Control Panel -->
+            <div class="panel">
+                <h2 class="panel-title">🎛️ Control</h2>
+                <div class="controls-grid">
+                    <button class="control-btn" id="micButton">
+                        <span class="icon">🎤</span>
+                        Micrófono
+                    </button>
+                    <button class="control-btn active" id="audioToggle">
+                        <span class="icon">🔊</span>
+                        Audio ON
+                    </button>
+                    <button class="control-btn" id="reconnectBtn">
+                        <span class="icon">🔗</span>
+                        Reconectar
+                    </button>
+                    <button class="control-btn" id="resetBtn">
+                        <span class="icon">🔄</span>
+                        Reiniciar
+                    </button>
+                </div>
+
+                <h3 class="panel-title" style="font-size: 0.9rem; margin-top: 1rem;">📋 Log del Sistema</h3>
+                <div class="system-log" id="systemLog">
+                    <div class="log-entry info">[Sistema] Interfaz cargada...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/static/js/app.js?v=3"></script>
+</body>
+
+</html>
