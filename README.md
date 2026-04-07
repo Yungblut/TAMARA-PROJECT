@@ -23,22 +23,37 @@
 - **Neural Text-to-Speech** -- Kokoro-82M ONNX with Misaki G2P for natural Spanish voice
 - **Server-side STT** -- faster-whisper Large V3 Turbo for local speech recognition
 - **Tool Calling / Function Calling** -- LLM autonomously queries MariaDB databases
+- **Web Search** -- DuckDuckGo integration via MCP (no API key required)
+- **Filesystem Access** -- Read and manage local files via MCP tools
 - **Real-time Streaming** -- Token-by-token responses via WebSocket
-- **MCP Integration** -- Model Context Protocol for extensible tool ecosystem
+- **MCP Integration** -- Model Context Protocol for extensible tool ecosystem (10K+ servers available)
 - **Modern Web Interface** -- React + Next.js with glassmorphism dark theme (planned)
 - **100% Private** -- Everything runs locally on your RTX 3090, zero cloud dependencies
 
-### Database Query Examples
+### What Can TAMARA Do?
 
-With MariaDB integration enabled, ask TAMARA in natural language:
+Ask TAMARA anything in natural language -- she decides which tools to use:
 
 | Question | What TAMARA does |
 |----------|-----------------|
 | *"What tables are in the database?"* | Lists all tables via `list_database_tables` tool |
 | *"How many users are there?"* | Executes `get_table_count` on the users table |
-| *"Describe the products table"* | Shows columns and types via `describe_table` |
 | *"What products cost more than $100?"* | Builds and runs a SELECT query with WHERE filter |
-| *"Show me pending orders"* | Autonomous SQL generation with tool calling |
+| *"Search for the latest news about AI"* | Queries DuckDuckGo via MCP web search |
+| *"What files are in my Documents folder?"* | Lists files via Filesystem MCP |
+| *"Read the contents of config.yaml"* | Reads local files via Filesystem MCP |
+
+### MCP Tools (Model Context Protocol)
+
+TAMARA uses MCP for a standardized, extensible tool ecosystem:
+
+| MCP Server | Capability | Status |
+|------------|-----------|--------|
+| **Database** | Query MariaDB with natural language (SELECT only by default) | Available |
+| **DuckDuckGo** | Web search without API keys -- fully local and private | Planned (Phase 3) |
+| **Filesystem** | Read, write, and manage local files securely | Planned (Phase 3) |
+
+MCP is governed by the Linux Foundation with 10,000+ public servers available. Adding new capabilities is as simple as connecting a new MCP server.
 
 ---
 
@@ -163,19 +178,23 @@ uv run pytest
 |  | Handler       |<| (Ollama)      | | (Kokoro+Misaki) |  |
 |  +-------+-------+ +-------+-------+ +-----------------+  |
 |          |                  |                              |
-|          |          +-------v-------+                      |
-|          |          | Tool Registry |                      |
-|          |          | +----------+  |                      |
-|          |          | | DB Tools |  |                      |
-|          |          | +----------+  |                      |
-|          |          +-------+-------+                      |
+|          |          +-------v--------+                     |
+|          |          | MCP Tools      |                     |
+|          |          | +------------+ |                     |
+|          |          | | Database   | |                     |
+|          |          | | DuckDuckGo | |                     |
+|          |          | | Filesystem | |                     |
+|          |          | +------------+ |                     |
+|          |          +-------+--------+                     |
 +-----------------------------------------------------------+
                               |
-                              v
-                      +---------------+
-                      |   MariaDB     |
-                      |   Database    |
-                      +---------------+
+               +--------------+--------------+
+               |              |              |
+               v              v              v
+        +----------+   +-----------+   +-----------+
+        | MariaDB  |   | DuckDuck  |   | Local     |
+        | Database |   | Go Search |   | Files     |
+        +----------+   +-----------+   +-----------+
 ```
 
 ---
@@ -324,7 +343,7 @@ TAMARA is undergoing a professional-grade modernization:
 | **Phase 0** | Done | UV, pyproject.toml, Pydantic Settings, Ruff, structlog, FastAPI lifespan |
 | **Phase 1** | Planned | PydanticAI agent, async DB, faster-whisper STT, dependency injection |
 | **Phase 2** | Planned | React + Next.js frontend, shadcn/ui, Tailwind CSS v4, glassmorphism |
-| **Phase 3** | Planned | MCP integration, comprehensive tests, Docker, GitHub Actions CI |
+| **Phase 3** | Planned | MCP (DuckDuckGo + Filesystem), comprehensive tests, Docker, GitHub Actions CI |
 
 ---
 
