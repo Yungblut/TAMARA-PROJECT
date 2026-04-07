@@ -1,0 +1,94 @@
+[project]
+name = "tamara"
+version = "3.0.0"
+description = "TAMARA - Totally Awesome Modular AI Responsive Assistant"
+readme = "README.md"
+license = "MIT"
+requires-python = ">= 3.11"
+dependencies = [
+    # Web framework
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.30.0",
+    "python-multipart>=0.0.9",
+
+    # AI / LLM
+    "pydantic-ai>=1.0.0",
+    "ollama>=0.4.0",
+
+    # TTS (Kokoro + Misaki G2P)
+    "kokoro-onnx>=0.4.0",
+    "misaki[espeak]>=0.8.0",
+    "soundfile>=0.12.0",
+    "numpy>=1.26.0",
+
+    # STT
+    "faster-whisper>=1.0.0",
+
+    # Database (async MariaDB)
+    "asyncmy>=0.2.9",
+
+    # Configuration
+    "pydantic-settings>=2.5.0",
+    "pyyaml>=6.0",
+    "python-dotenv>=1.0.0",
+
+    # Logging
+    "structlog>=24.0.0",
+
+    # MCP
+    "mcp>=1.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff>=0.7.0",
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.24.0",
+    "pytest-cov>=5.0.0",
+    "mypy>=1.11.0",
+    "httpx>=0.27.0",
+]
+gpu = [
+    # PyTorch with CUDA 12.x - install separately:
+    # uv pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
+]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 88
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # pyflakes
+    "I",    # isort
+    "N",    # pep8-naming
+    "UP",   # pyupgrade
+    "B",    # flake8-bugbear
+    "SIM",  # flake8-simplify
+    "TCH",  # flake8-type-checking
+    "RUF",  # ruff-specific rules
+    "ASYNC",# flake8-async
+]
+ignore = [
+    "E501",   # line too long (handled by formatter)
+    "B008",   # do not perform function calls in argument defaults (needed for Depends)
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["src"]
+
+[tool.ruff.format]
+quote-style = "double"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = true

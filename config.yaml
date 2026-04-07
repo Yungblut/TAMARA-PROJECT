@@ -1,0 +1,50 @@
+# TAMARA Configuration
+# Edit this file to customize behavior
+
+llm:
+  model: "gpt-oss:20b"
+  max_history: 500
+  system_prompt: "You are TAMARA, an intelligent voice assistant with access to tools. Respond in Spanish in a conversational and brief manner. You have access to a MariaDB database. When the user asks about data, use available tools to query the database. Maximum 50 words per response."
+
+tts:
+  model_path: "kokoro-models/kokoro-v1.0.onnx"
+  voices_path: "kokoro-models/voices-v1.0.bin"
+  voice: "ef_dora"
+  speed: 1.1
+  language: "es"
+
+server:
+  host: "0.0.0.0"
+  port: 8000
+  reload: false
+  log_level: "info"
+
+# ===========================================
+# MariaDB Database Configuration
+# ===========================================
+# Credentials are read from environment variables:
+#   TAMARA_DB_HOST, TAMARA_DB_PORT, TAMARA_DB_USER
+#   TAMARA_DB_PASSWORD, TAMARA_DB_NAME, TAMARA_DB_ALLOW_WRITE
+#
+# Method 1: Use environment variables (recommended)
+#   Create a .env file based on .env.example
+#
+# Method 2: Configure here (less secure)
+#   Only for local development
+database:
+  enabled: true
+  # host: "localhost"        # Or use TAMARA_DB_HOST
+  # port: 3306               # Or use TAMARA_DB_PORT
+  # user: "tamara_user"      # Or use TAMARA_DB_USER
+  # password: ""             # USE TAMARA_DB_PASSWORD (don't save here)
+  # database: "tamara_db"    # Or use TAMARA_DB_NAME
+  # allow_write: false       # Security: only SELECT queries
+
+# Tool Calling System
+tools:
+  enabled: true
+  available:
+    - list_database_tables
+    - describe_table
+    - query_database
+    - get_table_count
